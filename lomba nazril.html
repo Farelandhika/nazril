@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnikStore - Produk Aneh & Unik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 
+        ==================================================
+        INSTRUKSI EDIT MUDAH:
+        1. Ganti teks di bagian CONTENT SECTION
+        2. Tambah/hapus produk di bagian PRODUCTS DATA
+        3. Ubah warna tema di bagian THEME COLORS
+        4. Sesuaikan kategori di bagian CATEGORIES DATA
+        5. Edit testimoni di bagian TESTIMONIALS DATA
+        ==================================================
+        */
+
+        /* ===== THEME COLORS - EDIT DI SINI ===== */
+        :root {
+            --primary: #8a2be2;      /* Ungu utama */
+            --secondary: #ff6b6b;    /* Merah muda */
+            --accent: #4ecdc4;       /* Biru hijau */
+            --dark: #2d1b42;         /* Ungu gelap */
+            --light: #f8f9fa;        /* Putih terang */
+            --gray: #6c757d;         /* Abu-abu */
+            --success: #28a745;      /* Hijau sukses */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0a2e, #2d1b42);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(45, 27, 66, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(rgba(26, 10, 46, 0.8), rgba(45, 27, 66, 0.9)), 
+                        url('https://placehold.co/1920x1080/4a00e0/8e2de2?text=UnikStore') center/cover no-repeat;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--secondary), var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* Categories Section */
+        .section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dark-section {
+            background: linear-gradient(rgba(45, 27, 66, 0.9), rgba(26, 10, 46, 0.95));
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .categories-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        .testimonials-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .category-card, .product-card, .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-card:hover, .product-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-card p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Products Section */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--dark);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .product-image .placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 1.5rem 0 0 0;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .product-description {
+            color: #bbb;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #6a1cb5;
+            transform: scale(1.05);
+        }
+
+        .wishlist-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* Testimonials */
+        .testimonials .section {
+            text-align: center;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-content {
+            color: #ccc;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin: 1rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .navbar { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .btn { display: block; width: 100%; margin-bottom: 0.5rem; }
+            .btn-outline { margin-left: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 4rem 1rem; }
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .grid { gap: 1.5rem; }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    ==================================================
+    CONTENT SECTION - EDIT TEKS DI SINI
+    ==================================================
+    -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-atom"></i>
+                <!-- GANTI NAMA TOKO DI SINI -->
+                UnikStore
+            </a>
+            <div class="nav-links">
+                <a href="#home">Beranda</a>
+                <a href="#products">Produk</a>
+                <a href="#categories">Kategori</a>
+                <a href="#testimonials">Testimoni</a>
+            </div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>
+            <!-- GANTI JUDUL UTAMA DI SINI -->
+            Temukan Keunikan yang Luar Biasa
+        </h1>
+        <p>
+            <!-- GANTI DESKRIPSI UTAMA DI SINI -->
+            Koleksi produk aneh, unik, dan tidak biasa yang akan membuat hidup Anda lebih menarik dan penuh kejutan!
+        </p>
+        <div>
+            <a href="#products" class="btn">Jelajahi Produk</a>
+            <a href="#categories" class="btn btn-outline">Lihat Kategori</a>
+        </div>
+    </section>
+
+    <!-- 
+    ==================================================
+    CATEGORIES DATA - EDIT KATEGORI DI SINI
+    Format: 
+    - Ganti teks di <h3> dan <p>
+    - Ganti icon di class="fas fa-ICON"
+    - Tambah/hapus blok .category-card untuk menambah/mengurangi kategori
+    ==================================================
+    -->
+    <section class="section">
+        <h2 class="section-title">Kategori Unik</h2>
+        <div class="grid categories-grid">
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Teknologi Aneh</h3>
+                <p>Gadget dan alat canggih yang tidak biasa</p>
+            </div>
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Kuliner Unik</h3>
+                <p>Makanan dan minuman dengan rasa tak terduga</p>
+            </div>
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Rumah & Dekor</h3>
+                <p>Perlengkapan rumah tangga yang kreatif</p>
+            </div>
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <h3>Fashion Nyentrik</h3>
+                <p>Pakaian dan aksesoris yang mencolok</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ==================================================
+    PRODUCTS DATA - EDIT PRODUK DI SINI
+    Format untuk setiap produk:
+    - Ganti teks di .product-title dan .product-description
+    - Ganti harga di .product-price
+    - Ganti teks placeholder di .placeholder (singkat, 3-4 huruf)
+    - Ganti warna placeholder dengan style="background: WARNA;"
+    - Edit badge: "BARU", "POPULER", "DISKON", atau hapus div badge
+    - Tambah/hapus blok .product-card untuk menambah/mengurangi produk
+    ==================================================
+    -->
+    <section class="section dark-section">
+        <div class="section">
+            <h2 class="section-title">Produk Terbaru</h2>
+            <div class="filters">
+                <button class="filter-btn active">Semua</button>
+                <button class="filter-btn">Baru</button>
+                <button class="filter-btn">Populer</button>
+                <button class="filter-btn">Diskon</button>
+            </div>
+            <div class="grid products-grid">
+                <!-- PRODUCT 1 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <div class="placeholder" style="background: #ff6b6b;">USB</div>
+                        <span class="product-badge">BARU</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">USB Berbentuk Kentang</h3>
+                        <p class="product-description">Flashdisk 64GB berbentuk kentang asli dengan tekstur yang realistis</p>
+                        <div class="product-price">Rp 249.000</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Tambah ke Keranjang</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT 2 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <div class="placeholder" style="background: #4ecdc4;">TEA</div>
+                        <span class="product-badge">POPULER</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Teh Rasa Pizza</h3>
+                        <p class="product-description">Teh herbal dengan rasa pizza pepperoni yang autentik</p>
+                        <div class="product-price">Rp 89.000</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Tambah ke Keranjang</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT 3 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <div class="placeholder" style="background: #8a2be2;">CLOCK</div>
+                        <span class="product-badge">DISKON</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jam Dinding Tanpa Angka</h3>
+                        <p class="product-description">Jam dinding dengan desain minimalis tanpa angka, waktu ditunjukkan dengan pola cahaya</p>
+                        <div class="product-price">Rp 399.000 <span style="text-decoration: line-through; color: #777; font-size: 0.9rem;">Rp 499.000</span></div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Tambah ke Keranjang</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT 4 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <div class="placeholder" style="background: #ff6b6b;">SOCK</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Kaus Kaki Berbulu</h3>
+                        <p class="product-description">Kaus kaki dengan bulu halus seperti kaki binatang, hangat dan lucu</p>
+                        <div class="product-price">Rp 129.000</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Tambah ke Keranjang</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT 5 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <div class="placeholder" style="background: #4ecdc4;">PLANT</div>
+                        <span class="product-badge">BARU</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tanaman yang Berbicara</h3>
+                        <p class="product-description">Tanaman hias dengan sensor suara yang bisa "berbicara" saat disiram</p>
+                        <div class="product-price">Rp 599.000</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Tambah ke Keranjang</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT 6 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <div class="placeholder" style="background: #8a2be2;">CUP</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gelas Anti Tumpah Ajaib</h3>
+                        <p class="product-description">Gelas dengan teknologi gyroscopic yang tidak tumpah meski dibalik</p>
+                        <div class="product-price">Rp 189.000</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Tambah ke Keranjang</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ==================================================
+    TESTIMONIALS DATA - EDIT TESTIMONI DI SINI
+    Format untuk setiap testimoni:
+    - Ganti nama di .testimonial-info h4
+    - Ganti judul di .testimonial-info p
+    - Ganti teks testimoni di .testimonial-content
+    - Edit rating dengan mengganti ikon bintang
+    - Tambah/hapus blok .testimonial-card untuk menambah/mengurangi testimoni
+    ==================================================
+    -->
+    <section class="testimonials">
+        <div class="section">
+            <h2 class="section-title">Apa Kata Pelanggan</h2>
+            <div class="grid testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Budi Santoso</h4>
+                            <p>Pembeli Setia</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-content">"USB kentangnya luar biasa! Teman-teman kantor tidak percaya sampai saya tunjukkan kapasitasnya. Sangat unik dan berfungsi sempurna!"</p>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Siti Rahayu</h4>
+                            <p>Pembeli Baru</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-content">"Teh rasa pizza-nya keren banget! Awalnya ragu, tapi ternyata enak dan bikin ketagihan. Bakal beli lagi untuk stok!"</p>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Andi Wijaya</h4>
+                            <p>Kolektor Barang Unik</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-content">"Tanaman berbicara adalah barang paling keren yang pernah saya beli! Anak-anak senang sekali, dan ini menjadi bahan pembicaraan di setiap pesta rumah."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ==================================================
+    FOOTER CONTENT - EDIT DI SINI
+    ==================================================
+    -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>UnikStore</h3>
+                <p style="color: #aaa; line-height: 1.6; margin-bottom: 1.5rem;">
+                    Toko online terbesar untuk produk aneh, unik, dan tidak biasa di Indonesia. Kami percaya bahwa keunikan membuat hidup lebih berwarna!
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Produk</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Teknologi Aneh</a></li>
+                    <li><a href="#">Kuliner Unik</a></li>
+                    <li><a href="#">Rumah & Dekor</a></li>
+                    <li><a href="#">Fashion Nyentrik</a></li>
+                    <li><a href="#">Mainan Kreatif</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Perusahaan</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Karir</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Bantuan</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Pengiriman</a></li>
+                    <li><a href="#">Pengembalian</a></li>
+                    <li><a href="#">Garansi</a></li>
+                    <li><a href="#">Layanan Pelanggan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 UnikStore. Semua produk dijamin 100% unik dan tidak biasa.
+        </div>
+    </footer>
+
+    <script>
+        /*
+        ==================================================
+        INSTRUKSI EDIT JAVASCRIPT:
+        1. Semua fungsi sudah siap pakai
+        2. Tidak perlu edit kode JavaScript kecuali ingin menambah fitur
+        3. Animasi dan interaksi sudah otomatis
+        ==================================================
+        */
+
+        // DOM Elements
+        const cartCount = document.querySelector('.cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        // Cart functionality
+        let cartItems = 0;
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Button feedback
+                const originalText = this.textContent;
+                this.textContent = '✓ Ditambahkan!';
+                this.style.background = '#28a745';
+                
+                // Update cart count
+                cartItems++;
+                cartCount.textContent = cartItems;
+                cartCount.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cartCount.style.transform = 'scale(1)';
+                }, 300);
+                
+                // Reset button
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = '';
+                }, 2000);
+            });
+        });
+        
+        // Wishlist functionality
+        wishlistButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.style.color = '#ff6b6b';
+                    this.style.background = 'rgba(255, 107, 107, 0.2)';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    icon.style.color = '';
+                    this.style.background = '';
+                }
+            });
+        });
+        
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        // Observe elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize cart
+        cartCount.textContent = cartItems;
+    </script>
+</body>
+</html>
+
