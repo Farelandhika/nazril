@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player Modern</title>
+    <title>Music Player NaNi</title>
     <style>
         * {
             margin: 0;
@@ -235,8 +235,8 @@
 <body>
 
 <div class="player-container">
-    <h1>Music Player Modern</h1>
-    <div class="now-playing">Now Playing: <span id="current-title">Judul Lagu 1</span></div>
+    <h1>Music Player NaNi</h1>
+    <div class="now-playing">Now Playing: <span id="current-title">Judul Lagu 2</span></div>
 
     <!-- Gambar Album Art (Placeholder) -->
     <div class="album-art">🎵</div>
@@ -289,9 +289,10 @@
 
     <!-- Daftar Lagu -->
     <ul class="playlist" id="playlist">
-        <li data-src="lagu1.mp3"><span class="play-icon"><svg class="playlist-icon" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg></span> Judul Lagu 1</li>
-        <li data-src="lagu2.mp3"><span class="play-icon"><svg class="playlist-icon" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg></span> Judul Lagu 2</li>
-        <li data-src="lagu3.mp3"><span class="play-icon"><svg class="playlist-icon" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg></span> Judul Lagu 3</li>
+        <li data-src="lagu1.mp3"><span class="play-icon"><svg class="playlist-icon" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg></span> Eternal Torment from Mufid</li>
+        <li data-src="lagu2.mp3"><span class="play-icon"><svg class="playlist-icon" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg></span> The Last Breath</li>
+        <li data-src="lagu3.mp3"><span class="play-icon"><svg class="playlist-icon" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/></svg></span> They Don't Know</li>
+       
     </ul>
 </div>
 
@@ -313,9 +314,9 @@
 
     // Daftar lagu
     const songs = [
-        { src: "Eternal Torment by Mufid.mp3", title: "Eternal Torment from Mufid" },
-        { src: "lagu2.mp3", title: "Judul Lagu 2" },
-        { src: "lagu3.mp3", title: "Judul Lagu 3" }
+        { src: "Eternal.mp3", title: "Eternal Torment from Mufid" },
+        { src: "The Last Breath of Earth.mp3", title: "The Last Breath" },
+        { src: "They Don't Know.mp3", title: "They Don't Know" }
     ];
 
     let currentSongIndex = 0;
@@ -330,7 +331,7 @@
     // Fungsi untuk memuat lagu
     function loadSong(index) {
         if (index >= 0 && index < songs.length) {
-            const song = songs[index];
+            const song = songs[index]; 
             audio.src = song.src;
             currentTitleEl.textContent = song.title;
             // Update playlist UI
